@@ -4,12 +4,12 @@
       "version": "v1",
       "title": "ItemDemo"
     },
-    "basePath": "/",
+    "basePath": "/api",
     "schemes": [
       "https"
     ],
     "paths": {
-      "/test": {
+      "/values": {
         "get": {
           "consumes": [
             "application/json"
