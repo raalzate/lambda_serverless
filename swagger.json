@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
       "version": "v1",
-      "title": "TestDemo"
+      "title": "ItemDemo"
     },
     "basePath": "/",
     "schemes": [
@@ -28,7 +28,7 @@
                 "statusCode": "200",
                 "responseParameters": {},
                 "responseTemplates": {
-                  "application/json": "{\"name\": \"Hola mundo\"}"
+                  "application/json": "[{\"name\": \"Bogota\", \"id\": 1}]"
                 }
               }
             },
