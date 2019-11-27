@@ -15,33 +15,33 @@ dotnet tool update -g Amazon.Lambda.Tools
 ```
 # Lifecycle
 
-## Run locally
+## 1. Run locally
+### Workspace /FuncLambda
 ```sh
-cd FuncLambda
 dotnet restore
 dotnet run
 ```
 
-## Runner tests 
+## 2. Runner tests 
+### Workspace /FuncLambdaTest
 ```sh
-cd FuncLambdaTest
 dotnet test
 ```
 
 ## Verify Pact
+### Workspace /PactVerify
 ```sh
-cd PactVerify
 dotnet test
 ```
 ## Build
+### Workspace /FuncLambda
 ```sh
-cd FuncLambda
 ./build.ps1
 ```
 
 ## Deploy
+### Workspace /FuncLambda
 ```sh
-cd FuncLambda
 serverless deploy -v -p microservice
 ```
 
