@@ -7,6 +7,14 @@ Ejemplo de un webapi usando serverless framework
 - Install awscli (Python)
 - Install dotnet (core > 2.1)
 
+
+## Tool install
+```sh
+dotnet tool install --global Amazon.Lambda.Tools --version 3.0.1
+dotnet tool update -g Amazon.Lambda.Tools
+```
+# Lifecycle
+
 ## Run locally
 ```sh
 cd FuncLambda
@@ -14,12 +22,17 @@ dotnet restore
 dotnet run
 ```
 
-## Tool install
+## Runner tests 
 ```sh
-dotnet tool install --global Amazon.Lambda.Tools --version 3.0.1
-dotnet tool update -g Amazon.Lambda.Tools
+cd FuncLambdaTest
+dotnet test
 ```
 
+## Verify Pact
+```sh
+cd PactVerify
+dotnet test
+```
 ## Build
 ```sh
 cd FuncLambda
@@ -31,6 +44,8 @@ cd FuncLambda
 cd FuncLambda
 serverless deploy -v -p microservice
 ```
+
+# Documentation
 
 ## Update definitions
 ```sh
@@ -46,15 +61,4 @@ aws apigateway put-rest-api --rest-api-id <ID-API-GATEWAY> --mode overwrite --bo
 aws apigateway create-deployment --rest-api-id <ID-API-GATEWAY> --stage-name mock --region us-east-1
 ```
 
-## Runner tests 
-```sh
-cd FuncLambdaTest
-dotnet test
-```
-
-## Verify Pact
-```sh
-cd PactVerify
-dotnet test
-```
 
