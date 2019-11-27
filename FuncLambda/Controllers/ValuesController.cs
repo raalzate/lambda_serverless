@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Amazon.DynamoDBv2;
-using Amazon.DynamoDBv2.Model;using System;
+using System;
 using System.Threading.Tasks;
-using System.Linq;
+using microservice.Models;
+using microservice.Repositories;
 
 namespace microservice.Controllers
 {
@@ -11,49 +11,31 @@ namespace microservice.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private const string TableName = "microservice-dev";
 
-        private readonly IAmazonDynamoDB _amazonDynamoDb;
+        private readonly IItemRepository _itemRepository;
 
-        public ValuesController(IAmazonDynamoDB amazonDynamoDb)
+        public ValuesController(IItemRepository itemRepository)
         {
-            _amazonDynamoDb = amazonDynamoDb;
+            _itemRepository = itemRepository;
         }
 
         // GET api/values
         [HttpGet]
         public async Task<ModelTableItems> GetAllData()
         {
-            List<String> conditions = new List<String>();
-
-            var response = await _amazonDynamoDb.ScanAsync(TableName, conditions);
+            List<string> conditions = new List<string>();
+            var items = await _itemRepository.Scan(conditions);
             return new ModelTableItems
             {
-                Items = response.Items.Select(Map).ToList()
+                Items = items
             };
         }
-
-        private Item Map(Dictionary<string, AttributeValue> result)
-        {
-            return new Item
-            {
-                Id = Convert.ToInt32(result["id"].S),
-                Name = result["name"].S
-            };
-        }
-
 
     }
 
     public class ModelTableItems
     {
         public IEnumerable<Item> Items { get; set; }
-    }
-
-    public class Item
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
     }
 
 
