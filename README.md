@@ -28,18 +28,18 @@ dotnet run
 dotnet test
 ```
 
-## Verify Pact
+## 3. Verify Pact
 ### Workspace /PactVerify
 ```sh
 dotnet test
 ```
-## Build
+## 4. Build
 ### Workspace /FuncLambda
 ```sh
 ./build.ps1
 ```
 
-## Deploy
+## 5. Deploy
 ### Workspace /FuncLambda
 ```sh
 serverless deploy -v -p microservice
