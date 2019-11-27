@@ -1,31 +1,60 @@
 # Dotnet Lambda Function AWS
 
-Ejemplo realizar una webapi usando serverless framework
+Ejemplo de un webapi usando serverless framework
 
-## Pre-config
-dotnet new webapi
+## Pre-install
+- Install serverless-framework (With nodejs and npm)
+- Install awscli (Python)
+- Install dotnet (core > 2.1)
+
+## Run locally
+```sh
+cd FuncLambda
 dotnet restore
 dotnet run
+```
 
 ## Tool install
+```sh
 dotnet tool install --global Amazon.Lambda.Tools --version 3.0.1
 dotnet tool update -g Amazon.Lambda.Tools
+```
 
 ## Build
-.\build.ps1
+```sh
+cd FuncLambda
+./build.ps1
+```
 
 ## Deploy
-serverless deploy -v -p FuncLambda
+```sh
+cd FuncLambda
+serverless deploy -v -p microservice
+```
 
-## Update 
+## Update definitions
+```sh
 aws apigateway import-rest-api --body file://swagger.json --region us-east-1
-aws apigateway put-rest-api --rest-api-id t855dxehoe --mode overwrite --body file://swagger.json --region us-east-1
+```
+
+```sh
+aws apigateway put-rest-api --rest-api-id <ID-API-GATEWAY> --mode overwrite --body file://swagger.json --region us-east-1
+```
 
 ## Create Stage Mock
-aws apigateway create-deployment --rest-api-id ffrogq4xk8 --stage-name mock --region us-east-1
+```sh
+aws apigateway create-deployment --rest-api-id <ID-API-GATEWAY> --stage-name mock --region us-east-1
+```
 
+## Runner tests 
+```sh
+cd FuncLambdaTest
+dotnet test
+```
 
-docker build -t instance-dev .
-
-docker run -d -p 80:5000 --name dotnet-instance instance-dev
+## Verify Pact
+```sh
+cd PactVerify
+dotnet test
+```
 
