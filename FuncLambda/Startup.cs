@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Amazon.DynamoDBv2;
+using microservice.Repositories;
 
 namespace microservice
 {
@@ -19,14 +20,11 @@ namespace microservice
 
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddSingleton<IAmazonDynamoDB>(sp =>
+            services.AddSingleton<IItemRepository>(sp =>
             {
                // var clientConfig = new AmazonDynamoDBConfig { ServiceURL = "localhost:6060" };
-                return new AmazonDynamoDBClient();
+                return new ItemRepository(new AmazonDynamoDBClient());
             });
-
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
